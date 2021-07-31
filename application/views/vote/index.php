@@ -2,7 +2,7 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="text-center font-weight-bold">Pemilihan Umum RT 02/15 tahun 2023</h3>
+                <h3 class="text-center font-weight-bold text-capitalize">Pemilihan Umum RT 02/15 tahun 2023</h3>
             </div>
         </div>
         <div class="row">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">NIK</label>
+                        <label for="password" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
                             <input type="password" class="form-control" id="password">
                         </div>

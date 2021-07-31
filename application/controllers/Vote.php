@@ -14,9 +14,15 @@ class Vote extends CI_Controller
     {
         $data['judul']    = 'Voting';
         $this->load->view('template_auth/header', $data);
-        // $this->load->view('template_auth/navbar', $data);
-        // $this->load->view('template_auth/sidebar', $data);
         $this->load->view('vote/index', $data);
         $this->load->view('template_auth/footer');
+    }
+
+    public function hasil()
+    {
+        $data['judul']    = 'Hasil Voting';
+        $this->load->view('templates/header', $data);
+        $this->load->view('vote/hasil', $data);
+        $this->load->view('templates/footer');
     }
 }
