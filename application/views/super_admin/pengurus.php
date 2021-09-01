@@ -35,6 +35,7 @@
                                     <tr>
                                         <td>1</td>
                                         <td>Suryadi</td>
+                                        <td>11111111111</td>
                                         <td>089678468651</td>
                                         <td>Laki-laki</td>
                                         <td>
@@ -54,6 +55,7 @@
                                     <tr>
                                         <td>2</td>
                                         <td>Khalisa</td>
+                                        <td>2222222222</td>
                                         <td>081298475154</td>
                                         <td>Laki-laki</td>
                                         <td>

@@ -8,6 +8,8 @@
             </div>
         </div>
     </div>
+    <!-- alert -->
+    <div class="swalDefaultSuccess" data-id="<?= $this->session->flashdata('sukses') ?>"></div>
 
     <!-- Main content -->
     <div class="content">

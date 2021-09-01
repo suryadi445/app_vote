@@ -48,6 +48,12 @@
 <script src="<?= base_url('assets/adminLTE/') ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?= base_url('assets/adminLTE/') ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?= base_url('assets/adminLTE/') ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="<?= base_url('assets/adminLTE/') ?>plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="<?= base_url('assets/adminLTE/') ?>plugins/toastr/toastr.min.js"></script>
+
+<script src="<?= base_url('assets/js/script.js') ?>"></script>
 <script>
     $(function() {
         $("#example1").DataTable({
