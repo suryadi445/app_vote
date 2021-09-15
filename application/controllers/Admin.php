@@ -6,10 +6,14 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        // $this->load->model('');
+        $this->load->model('Admin_model');
     }
     public function index()
     {
+        $handphone = $this->session->userdata('handphone');
+
+        $data['row']      = $this->Admin_model->row('tbl_users', 'handphone', $handphone);
+
         $data['judul']    = 'Admin';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	$("input").click(function () {
-		$("#alert").addClass("d-none");
+		$(".errors").addClass("d-none");
 	});
 
 	// manipulasi text pada input file gambar bootstrap
@@ -10,7 +10,9 @@ $(document).ready(function () {
 	});
 
 	// alert
-	$sukses = $(".swalDefaultSuccess").attr("data-id");
+	$sukses = $(".sukses").attr("data-id");
+	$flash = $(".gagal").attr("data-id");
+
 	$(function () {
 		const Toast = Swal.mixin({
 			toast: true,
@@ -23,6 +25,11 @@ $(document).ready(function () {
 			Toast.fire({
 				icon: "success",
 				title: $sukses,
+			});
+		} else if ($flash) {
+			Toast.fire({
+				icon: "error",
+				title: $flash,
 			});
 		}
 	});

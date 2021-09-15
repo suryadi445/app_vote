@@ -48,17 +48,17 @@ class Auth extends CI_Controller
                     $this->session->set_userdata('nama', $user_login);
                     redirect('vote');
                 } else {
-                    $this->session->set_flashdata('flash', 'Selamat datang ' . $data['nama']);
+                    $this->session->set_flashdata('sukses', 'Selamat datang ' . $data['nama']);
                     $this->session->set_userdata($data);
                     redirect('admin');
                 }
             } else {
-                $this->session->set_flashdata('flash', 'Password yang anda masukkan salah');
+                $this->session->set_flashdata('gagal', 'Password yang anda masukkan salah');
 
                 redirect('auth/index');
             }
         } else {
-            $this->session->set_flashdata('flash', 'Anda belum terdaftar, mohon registrasi terlebih dahulu..');
+            $this->session->set_flashdata('gagal', 'Anda belum terdaftar, mohon registrasi terlebih dahulu..');
             redirect('auth/index');
         }
     }
