@@ -29,6 +29,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?= base_url('admin/daftar_kandidat') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Daftar Kandidat</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?= base_url('auth/registrasi') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Registrasi</p>
