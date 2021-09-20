@@ -84,6 +84,40 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function edit_kandidat()
+    {
+        $id             = htmlspecialchars($this->input->post('data_id', true));
+        $data['row']    = $this->Admin_model->row('tbl_kandidat', 'id', $id);
+
+        echo json_encode($data['row']);
+    }
+
+    public function proses_edit()
+    {
+        $nama       = htmlspecialchars($this->input->post('nama', true));
+        $nik        = htmlspecialchars($this->input->post('nik', true));
+        $alamat     = htmlspecialchars($this->input->post('alamat', true));
+        $gambar     = htmlspecialchars($this->input->post('gambar', true));
+        $no_urut   = htmlspecialchars($this->input->post('no_urut', true));
+        $handphone  = htmlspecialchars($this->input->post('handphone', true));
+        $id         = htmlspecialchars($this->input->post('id', true));
+
+        $data = [
+            'nama' => $nama,
+            'nik' => $nik,
+            'alamat' => $alamat,
+            // 'foto' => $gambar,
+            'no_urut' => $no_urut,
+            'handphone' => $handphone,
+            'id' => $id,
+        ];
+
+        $query = $this->Admin_model->update('tbl_kandidat', $id, $data);
+
+        echo json_encode($query);
+    }
+
+    // tambah kandidat
     public function kandidat()
     {
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim'); //nama
@@ -141,7 +175,7 @@ class Admin extends CI_Controller
 
                 $this->session->set_flashdata('sukses', 'Terima kasih, Registrasi berhasil dilakukan..');
                 $this->Admin_model->insert('tbl_kandidat', $data);
-                redirect('admin');
+                redirect('admin/daftar_kandidat');
             }
         }
     }
