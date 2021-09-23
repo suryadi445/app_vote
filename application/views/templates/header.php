@@ -28,7 +28,8 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="<?= base_url('assets/adminLTE/') ?>plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url('assets/adminLTE/') ?>plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"> -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Toastr -->
     <link rel="stylesheet" href="<?= base_url('assets/adminLTE/') ?>plugins/toastr/toastr.min.css">
 </head>

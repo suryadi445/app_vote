@@ -1,6 +1,8 @@
 $(document).ready(function () {
+	// menghapus pesan error dari form validasi ci
 	$("input").click(function () {
 		$(".errors").addClass("d-none");
+		$('.eror').hide()
 	});
 
 	// manipulasi text pada input file gambar bootstrap
@@ -12,7 +14,6 @@ $(document).ready(function () {
 	// alert
 	$sukses = $(".sukses").attr("data-id");
 	$flash = $(".gagal").attr("data-id");
-
 	$(function () {
 		const Toast = Swal.mixin({
 			toast: true,
@@ -34,6 +35,7 @@ $(document).ready(function () {
 		}
 	});
 
+	// mendapatkan row untuk edit
 	$('.edit').click(function(){
 		var data_id = $(this).attr('data-id');
 
@@ -43,7 +45,6 @@ $(document).ready(function () {
 			data: {data_id : data_id},
 			success: function (response) {
 				var obj = JSON.parse(response);
-				console.log(obj);
 				$('#nama').val(obj.nama)
 				$('#nik').val(obj.nik)
 				$('#handphone').val(obj.handphone)
@@ -54,33 +55,63 @@ $(document).ready(function () {
 		})
 	})
 
-	$('#simpan').click(function () {
-		var gambar 		= $('#label_gambar').val().replace(/C:\\fakepath\\/i, '');
-		var nama		= $('#nama').val()
-		var nik			= $('#nik').val()
-		var handphone	= $('#handphone').val()
-		var alamat		= $('#alamat').val()
-		var no_urut		= $('#no_kandidat').val()
-		var id			= $('#id').val()
+	// proses edit
+	$('#proses_edit').click(function () {
+		var form_data = new FormData($("#form")[0]);
 
 		$.ajax({
 			url : 'proses_edit',
 			type: 'post',
-			data : {
-				id : id,
-				gambar : gambar,
-				nama : nama,
-				nik : nik,
-				handphone : handphone,
-				alamat : alamat,
-				no_urut : no_urut
-			},
+			enctype : 'multipart/form-data',
+			cache: false,
+			contentType: false,
+			processData: false,
+			data : form_data,
 			success :  function (response) {
+				var obj = JSON.parse(response)
 
 				if(response == 'true'){
+					// edit sukses
 					$('#modal_kandidat').modal('hide');
+					location.reload()
+				}else{
+					// edit gagal
+					var error_nama = obj.nama
+					var error_nik = obj.nik
+					var error_alamat = obj.alamat
+					var error_no_kandidat = obj.no_kandidat
+					var error_handphone = obj.handphone
+					var error_gambar = obj.gambar
+
+					$('.eror').show()
+					$('.error_nama').html(error_nama)
+					$('.error_nik').html(error_nik)
+					$('.error_alamat').html(error_alamat)
+					$('.error_no_kandidat').html(error_no_kandidat)
+					$('.error_handphone').html(error_handphone)
+					$('.error_gambar').html(error_gambar)
 				}
 			}
 		})
 	})
-});
+
+	// hapus data
+	$('.hapus').click(function(e){
+	e.preventDefault();
+    var link = $(this).attr("href");
+    Swal.fire({
+		title: "Data yang dihapus tidak dapat dikembalikan",
+		text: "Apakah anda setuju?",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#d33",
+		cancelButtonColor: "silver",
+		confirmButtonText: "Ya, Hapus",
+		cancelButtonText: "Batal",
+    }).then((result) => {
+		if (result.isConfirmed) {
+        window.location = link;
+		}
+    });
+	})
+})
