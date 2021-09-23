@@ -48,6 +48,7 @@
                                         <option disabled selected value <?= set_select('user', '', TRUE); ?>>Pilih User</option>
                                         <option value="super admin" <?= set_select('user', 'super admin'); ?>>Super Admin</option>
                                         <option value="admin" <?= set_select('user', 'admin'); ?>>Admin</option>
+                                        <option value="pengurus" <?= set_select('user', 'pengurus'); ?>>Pengurus</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

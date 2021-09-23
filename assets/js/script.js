@@ -38,9 +38,10 @@ $(document).ready(function () {
 	// mendapatkan row untuk edit
 	$('.edit').click(function(){
 		var data_id = $(this).attr('data-id');
+		var data_link = $(this).attr('data-link')
 
 		$.ajax({
-			url : 'edit_kandidat',
+			url : data_link,
 			type: 'post',
 			data: {data_id : data_id},
 			success: function (response) {
@@ -51,6 +52,7 @@ $(document).ready(function () {
 				$('#alamat').val(obj.alamat)
 				$('#no_kandidat').val(obj.no_urut)
 				$('#id').val(obj.id)
+				$('#jenis_kelamin').val(obj.jenis_kelamin).change()
 			}
 		})
 	})
@@ -58,9 +60,10 @@ $(document).ready(function () {
 	// proses edit
 	$('#proses_edit').click(function () {
 		var form_data = new FormData($("#form")[0]);
+		var data_link = $(this).attr('data-link')
 
 		$.ajax({
-			url : 'proses_edit',
+			url : data_link,
 			type: 'post',
 			enctype : 'multipart/form-data',
 			cache: false,
@@ -68,11 +71,13 @@ $(document).ready(function () {
 			processData: false,
 			data : form_data,
 			success :  function (response) {
+				// console.log(response);
+				// return false
 				var obj = JSON.parse(response)
 
 				if(response == 'true'){
 					// edit sukses
-					$('#modal_kandidat').modal('hide');
+					$('#modal_pengurus').modal('hide');
 					location.reload()
 				}else{
 					// edit gagal

@@ -47,7 +47,7 @@
                                             </td>
                                             <td><?= $row['alamat'] ?></td>
                                             <td style="width: 190px;">
-                                                <a href="" class="btn btn-warning mr-1 edit" data-toggle="modal" data-target="#modal_kandidat" data-id="<?= $row['id'] ?>">Edit</a>
+                                                <a href="" class="btn btn-warning mr-1 edit" data-toggle="modal" data-target="#modal_kandidat" data-id="<?= $row['id'] ?>" data-link="edit_kandidat">Edit</a>
                                                 <a href="<?= base_url('admin/delete/') ?><?= $row['id'] ?>" class="btn btn-danger ml-1 hapus">Hapus</a>
                                             </td>
                                         </tr>
@@ -124,7 +124,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="proses_edit">Edit</button>
+                <button type="button" class="btn btn-primary" id="proses_edit" data-link="proses_edit">Edit</button>
             </div>
         </div>
     </div>

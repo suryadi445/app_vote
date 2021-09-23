@@ -34,12 +34,113 @@ class Admin extends CI_Controller
 
     public function pengurus()
     {
+
+        $data['result'] = $this->Admin_model->get_where('tbl_users', 'user', 'pengurus')->result_array();
+
         $data['judul']    = 'Pengurus';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('super_admin/pengurus', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function edit_pengurus()
+    {
+        $id             = htmlspecialchars($this->input->post('data_id', true));
+        $data['row']    = $this->Admin_model->get_where('tbl_users', 'id', $id)->row_array();
+
+        echo json_encode($data['row']);
+    }
+
+    public function proses_edit_pengurus()
+    {
+        $id         = htmlspecialchars($this->input->post('id', true));
+        $nama       = htmlspecialchars($this->input->post('nama', true));
+        $nik        = htmlspecialchars($this->input->post('nik', true));
+        $handphone  = htmlspecialchars($this->input->post('handphone', true));
+        $j_kelamin  = htmlspecialchars($this->input->post('jenis_kelamin', true));
+        $gambar     = $_FILES['gambar']['name'];
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('nik', 'NIK', 'required|trim|numeric');
+        $this->form_validation->set_rules('handphone', 'No Handphone', 'required|trim|numeric');
+        $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required|trim');
+
+        $data['row']        = $this->db->get_where('tbl_users', ['id' => $id])->row_array();
+
+        if ($this->form_validation->run() == false) {
+            $error = [
+                'nama' => (form_error('nama', '<p>', '</p>')),
+                'nik' => (form_error('nik', '<p>', '</p>')),
+                'handphone' => (form_error('handphone', '<p>', '</p>')),
+                'j_kelamin' => (form_error('jenis_kelamin', '<p>', '</p>')),
+
+            ];
+            echo json_encode($error);
+        } else {
+            if ($gambar) {
+                $config['upload_path']      = './assets/upload_image';
+                $config['allowed_types']    = 'jpg|jpeg|png';
+                $config['max_size']         = 2000;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('gambar')) {
+                    // berhasil diupload
+                    $foto_lama          = $data['row']['gambar'];
+                    $gambar_baru        = $this->upload->data('file_name'); //membuat nama gambar baru
+
+                    $data = [
+                        'nama' => $nama,
+                        'nik' => $nik,
+                        'gambar' => $gambar_baru,
+                        'handphone' => $handphone,
+                        'jenis_kelamin' => $j_kelamin
+                    ];
+
+                    $this->session->set_flashdata('sukses', 'Data berhasil diedit');
+
+                    $query = $this->Admin_model->update('tbl_users', $id, $data);
+
+                    if ($query) {
+                        unlink(FCPATH . 'assets/upload_image/' . $foto_lama); // untuk menghapus file yg sudah ada
+                        echo json_encode($query);
+                    }
+                } else {
+                    $error = [
+                        'gambar' =>  $this->upload->display_errors()
+                    ];
+                    echo json_encode($error);
+                }
+            } else {
+                $data = [
+                    'nama'          => $nama,
+                    'nik'           => $nik,
+                    'handphone'     => $handphone,
+                    'jenis_kelamin' => $j_kelamin
+                ];
+
+                $this->session->set_flashdata('sukses', 'Data berhasil diedit');
+                $query = $this->Admin_model->update('tbl_users', $id, $data);
+                echo json_encode($query);
+            }
+        }
+    }
+
+    public function delete_pengurus($id)
+    {
+        $row        = $this->Admin_model->row('tbl_users', 'id', $id);
+        $foto_lama  = $row['gambar'];
+
+        $query      = $this->Admin_model->delete('tbl_users', 'id', $id);
+        if ($query) {
+            unlink(FCPATH . 'assets/upload_image/' . $foto_lama); // untuk menghapus file yg sudah ada
+        }
+
+        $this->session->set_flashdata('sukses', 'Data berhasil dihapus');
+        redirect('admin/pengurus');
     }
 
     public function sub_admin()
@@ -93,7 +194,7 @@ class Admin extends CI_Controller
         echo json_encode($data['row']);
     }
 
-    // proses edit data
+    // proses edit data kandidat
     public function proses_edit()
     {
         $nama       = htmlspecialchars($this->input->post('nama', true));

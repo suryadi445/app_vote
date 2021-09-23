@@ -9,6 +9,11 @@ class Admin_model extends CI_Model
         return $this->db->get_where($tabel, [$fields => $id])->row_array();
     }
 
+    public function get_where($tabel, $fields, $id)
+    {
+        return $this->db->get_where($tabel, [$fields => $id]);
+    }
+
     // mengambil semua data
     public function get($tabel)
     {
