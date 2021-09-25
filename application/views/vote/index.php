@@ -6,78 +6,79 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-danger">Test Vote</button>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-12">
                 <div class="row justify-content-around">
-                    <div class="card m-2" style="width: 18rem;">
-                        <img src="<?= base_url('assets/image/suryadi.jpg') ?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="text-center font-weight-bold text-capitalize">1</p>
-                            <h5 class="font-weight-bold card-title">Suryadi</h5>
-                            <p class="card-text text-capitalize">Jl. H. Gadung Rt.02/15 no.20 pondok Ranji CIputat timur, Tangerang selatan</p>
+                    <?php
+                    $no = 1;
+                    foreach ($result as $row) :
+                    ?>
+                        <div class="kandidat" data-id="<?= $no++ ?>">
+                            <div class="card m-2" style="width: 18rem;">
+                                <img src="<?= base_url('assets/upload_kandidat/') ?><?= $row['foto'] ?>" class="card-img-top" style="height: 24rem;">
+                                <div class="card-body">
+                                    <p class="text-center font-weight-bold text-capitalize"><?= $row['no_urut'] ?></p>
+                                    <h5 class="font-weight-bold card-title"><?= $row['nama'] ?></h5>
+                                    <p class="card-text text-capitalize"><?= $row['alamat'] ?></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card m-2" style="width: 18rem;">
-                        <img src="<?= base_url('assets/image/suryadi.jpg') ?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="text-center font-weight-bold text-capitalize">2</p>
-                            <h5 class="font-weight-bold card-title">Suryadi</h5>
-                            <p class="card-text text-capitalize">Jl. H. Gadung Rt.02/15 no.20 pondok Ranji CIputat timur, Tangerang selatan</p>
-                        </div>
-                    </div>
-                    <div class="card m-2" style="width: 18rem;">
-                        <img src="<?= base_url('assets/image/suryadi.jpg') ?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="text-center font-weight-bold text-capitalize">3</p>
-                            <h5 class="font-weight-bold card-title">Suryadi</h5>
-                            <p class="card-text text-capitalize">Jl. H. Gadung Rt.02/15 no.20 pondok Ranji CIputat timur, Tangerang selatan</p>
-                        </div>
-                    </div>
+                    <?php endforeach ?>
                 </div>
-            </div>
-        </div>
-        <div class="row float-right">
-            <div class="col-md-4">
-                <button class="btn btn-danger" data-toggle="modal" data-target="#modalVote">Selesai</button>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="modalVote" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- Modal  hasil-->
+<div class="modal fade" id="modalHasil" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel">Konfirmasi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="ModalLabel">Hasil Sementara</h5>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group row">
-                        <label for="nama" class="col-sm-2 col-form-label">Nama</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nama">
+                <div class="card-deck">
+                    <div class="card">
+                        <div class="row mt-3 justify-content-center">
+                            <img src="<?= base_url('assets/image/suryadi.jpg') ?>" style="width: 7rem;" class="card-img-top">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="text-center"><b>1</b></h5>
+                            <p class="text-center"><b>nama</b></p>
+                            <p>Suara Sementara : <b> 10 suara</b></p>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password">
+                    <div class="card">
+                        <div class="row mt-3 justify-content-center">
+                            <img src="<?= base_url('assets/image/suryadi.jpg') ?>" style="width: 7rem;" class="card-img-top">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="text-center"><b>2</b></h5>
+                            <p class="text-center"><b>nama</b></p>
+                            <p>Suara Sementara : <b> 10 suara</b></p>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Simpan</button>
+                    <div class="card">
+                        <div class="row mt-3 justify-content-center">
+                            <img src="<?= base_url('assets/image/suryadi.jpg') ?>" style="width: 7rem;" class="card-img-top">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="text-center"><b>3</b></h5>
+                            <p class="text-center"><b>nama</b></p>
+                            <p>Suara Sementara : <b> 10 suara</b></p>
+                        </div>
                     </div>
+                </div>
+                <div class="row justify-content-lg-between p-3">
+                    <p>Total Kepala Keluarga : <b>80</b></p>
+                    <p>Total Pemilih Sementara : <b>70</b></p>
+                    <p>Total Suara Sah : <b>70</b></p>
+                    <p>Total Suara Tidak Sah : <b>0</b></p>
+                </div>
+                <div class="row justify-content-end p-3">
+                    <a href="<?= base_url() ?>" class="btn btn-danger logout">Logout</a>
+                </div>
             </div>
-            </form>
         </div>
     </div>
 </div>

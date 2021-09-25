@@ -32,7 +32,7 @@
                                         <th>No. Handphone</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Foto</th>
-                                        <th>Aktivasi</th>
+                                        <!-- <th>Aktivasi</th> -->
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -50,12 +50,12 @@
                                             <td>
                                                 <img src="<?= base_url('assets/upload_image/') ?><?= $row['gambar'] ?>" class="img-fluid" style="width: 60px; height: 80px">
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" class="custom-control-input" id="customSwitch1">
                                                     <label class="custom-control-label" for="customSwitch1">ON/OFF</label>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                             <td style="width: 190px;">
                                                 <a href="" class="btn btn-warning mr-1 edit" data-toggle="modal" data-target="#modal_pengurus" data-link="edit_pengurus" data-id="<?= $row['id'] ?>">Ubah</a>
                                                 <a href="<?= base_url('admin/delete_pengurus/') ?><?= $row['id'] ?>" class="btn btn-danger ml-1 hapus">hapus</a>

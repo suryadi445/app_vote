@@ -9,7 +9,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-user-shield"></i>
                         <p>
                             Super Admin
                             <i class="right fas fa-angle-left"></i>
@@ -44,7 +44,7 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-poll"></i>
                         <p>
                             Hasil Pemilihan
                             <i class="right fas fa-angle-left"></i>

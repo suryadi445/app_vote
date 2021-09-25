@@ -9,57 +9,25 @@
             <div class="col-md-12">
                 <div class="row justify-content-start">
                     <div class="col-md-5 text-capitalize">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="<?= base_url('assets/image/suryadi.jpg') ?>" class="img-thumbnail" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="font-weight-bold text-danger text-capitalize card-header">
-                                        30 Suara
+                        <?php foreach ($join as $row) : ?>
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="<?= base_url('assets/upload_kandidat/') ?><?= $row['foto'] ?>" class="img-thumbnail" style="width: 120px; height:198px">
                                     </div>
-                                    <div class="card-body">
-                                        <p class="text-center font-weight-bold text-capitalize">1</p>
-                                        <h5 class="font-weight-bold card-title">Suryadi</h5>
-                                        <p class="card-text text-capitalize">Jl. H. Gadung Rt.02/15 no.20 pondok Ranji CIputat timur, Tangerang selatan</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="<?= base_url('assets/image/suryadi.jpg') ?>" class="img-thumbnail" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="font-weight-bold text-danger text-capitalize card-header">
-                                        30 Suara
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="text-center font-weight-bold text-capitalize">2</p>
-                                        <h5 class="font-weight-bold card-title">Suryadi</h5>
-                                        <p class="card-text text-capitalize">Jl. H. Gadung Rt.02/15 no.20 pondok Ranji CIputat timur, Tangerang selatan</p>
+                                    <div class="col-md-8">
+                                        <div class="font-weight-bold text-danger text-capitalize card-header">
+                                            <?= $row['hasil'] ?> Suara
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="text-center font-weight-bold text-capitalize"><?= $row['no_urut'] ?></p>
+                                            <h5 class="font-weight-bold card-title"><?= $row['nama'] ?></h5>
+                                            <p class="card-text text-capitalize"><?= $row['alamat'] ?></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="<?= base_url('assets/image/suryadi.jpg') ?>" class="img-thumbnail" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="font-weight-bold text-danger text-capitalize card-header">
-                                        30 Suara
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="text-center font-weight-bold text-capitalize">3</p>
-                                        <h5 class="font-weight-bold card-title">Suryadi</h5>
-                                        <p class="card-text text-capitalize">Jl. H. Gadung Rt.02/15 no.20 pondok Ranji CIputat timur, Tangerang selatan</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach ?>
                     </div>
                     <div class="col-md-7 text-capitalize">
                         <div class="card">

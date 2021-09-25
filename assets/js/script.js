@@ -5,11 +5,15 @@ $(document).ready(function () {
 		$('.eror').hide()
 	});
 
+// =========================================================================================================//
+
 	// manipulasi text pada input file gambar bootstrap
 	$(".custom-file-input").on("change", function () {
 		let fileName = $(this).val().split("\\").pop();
 		$(this).next(".custom-file-label").addClass("selected").html(fileName);
 	});
+
+// =========================================================================================================//
 
 	// alert
 	$sukses = $(".sukses").attr("data-id");
@@ -35,6 +39,8 @@ $(document).ready(function () {
 		}
 	});
 
+// =========================================================================================================//
+
 	// mendapatkan row untuk edit
 	$('.edit').click(function(){
 		var data_id = $(this).attr('data-id');
@@ -56,6 +62,8 @@ $(document).ready(function () {
 			}
 		})
 	})
+
+// =========================================================================================================//
 
 	// proses edit
 	$('#proses_edit').click(function () {
@@ -100,23 +108,32 @@ $(document).ready(function () {
 		})
 	})
 
+// =========================================================================================================//
+
 	// hapus data
 	$('.hapus').click(function(e){
 	e.preventDefault();
     var link = $(this).attr("href");
-    Swal.fire({
-		title: "Data yang dihapus tidak dapat dikembalikan",
-		text: "Apakah anda setuju?",
-		icon: "warning",
-		showCancelButton: true,
-		confirmButtonColor: "#d33",
-		cancelButtonColor: "silver",
-		confirmButtonText: "Ya, Hapus",
-		cancelButtonText: "Batal",
-    }).then((result) => {
-		if (result.isConfirmed) {
-        window.location = link;
-		}
-    });
+		Swal.fire({
+			title: "Data yang dihapus tidak dapat dikembalikan",
+			text: "Apakah anda setuju?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#d33",
+			cancelButtonColor: "silver",
+			confirmButtonText: "Ya, Hapus",
+			cancelButtonText: "Batal",
+		}).then((result) => {
+			if (result.isConfirmed) {
+			window.location = link;
+			}
+		});
 	})
+
+// =========================================================================================================//
+
+	
+
+// =========================================================================================================//
+
 })

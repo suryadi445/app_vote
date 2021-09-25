@@ -42,11 +42,18 @@ class Auth extends CI_Controller
                     'nama'      => $user['nama'],
                 ];
 
-                if ($user['status'] == 'user') {
-                    $user_login = $user['nama'];
-                    $this->session->set_flashdata('sukses', 'Selamat datang ' . $data['nama']);
-                    $this->session->set_userdata('nama', $user_login);
-                    redirect('vote');
+                if ($user['user'] == 'user') {
+                    // aktivasi 0 = belum memilih
+                    if ($user['aktivasi'] == 0) {
+                        $user_login = $user['nama'];
+                        $this->session->set_flashdata('sukses', 'Selamat datang ' . $data['nama']);
+                        $this->session->set_userdata('nama', $user_login);
+                        redirect('vote/test_vote');
+                    } else {
+                        // user sudah memilih kandidat
+                        $this->session->set_flashdata('gagal', 'Anda sudah melakukan pemilihan');
+                        redirect('auth');
+                    }
                 } else {
                     $this->session->set_flashdata('sukses', 'Selamat datang ' . $data['nama']);
                     $this->session->set_userdata($data);

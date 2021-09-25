@@ -55,6 +55,8 @@
 <script src="<?= base_url('assets/adminLTE/') ?>plugins/toastr/toastr.min.js"></script>
 
 <script src="<?= base_url('assets/js/script.js') ?>"></script>
+<script src="<?= base_url('assets/js/vote.js') ?>"></script>
+
 <script>
     $(function() {
         $("#example1").DataTable({
