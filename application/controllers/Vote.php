@@ -54,25 +54,13 @@ class Vote extends CI_Controller
         echo json_encode($data);
     }
 
-    public function ajax_data()
+    public function data_ajax()
     {
-        $this->db->select('hasil');
-        $query = $this->db->get('vote')->result_array();
-        foreach ($query as $key => $data_ajax) {
-            $data = $data_ajax['hasil'];
-            // echo json_encode($data);
-        }
+        $this->db->select_sum('hasil');
+        $this->db->from('vote');
+        $data = $this->db->get()->row_array();
 
-        $join       = $this->Vote_model->join();
-        foreach ($join as $key => $data_join) {
-            $data_join = $data_join['hasil'];
-        }
-
-        if ($data === $data_join) {
-            echo json_encode('a');
-        } else {
-            echo json_encode('b');
-        }
+        echo json_encode($data);
     }
 
     public function insert()

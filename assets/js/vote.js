@@ -1,4 +1,30 @@
 $(document).ready(function(){
+
+    //==============================================================================================//
+
+    // alert
+	$sukses = $(".sukses").attr("data-id");
+	$flash = $(".gagal").attr("data-id");
+	$(function () {
+		const Toast = Swal.mixin({
+			toast: true,
+			position: "top-end",
+			showConfirmButton: false,
+			timer: 4000,
+		});
+
+		if ($sukses) {
+			Toast.fire({
+				icon: "success",
+				title: $sukses,
+			});
+		} else if ($flash) {
+			Toast.fire({
+				icon: "error",
+				title: $flash,
+			});
+		}
+	});
     
     //==============================================================================================//
     $('.kandidat').on('click', function(){
@@ -73,7 +99,10 @@ $(document).ready(function(){
         // $('#halaman_hasil').ready(function () {
 
             setInterval(getdata, 5000);
+            setInterval(alert, 5000);
             getdata();
+            alert()
+
     
             function getdata() {
                 $.ajax({
@@ -105,6 +134,39 @@ $(document).ready(function(){
                     }
                 })
             } 
+
+            function alert(){
+                $.ajax({
+                    url: 'data_ajax',
+                    type: 'post',
+                    success: function(data){
+                        // console.log(data);
+                        var obj = JSON.parse(data)
+                        var nilai = obj.hasil;
+
+                        var cek_local = localStorage.getItem('nilai');
+                        var set_local = localStorage.setItem('nilai', nilai);
+
+                        if (cek_local != nilai) {
+                            set_local;
+
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 4000,
+                            });
+
+                            Toast.fire({
+                                icon: "success",
+                                title: 'Perolehan Data Kandidat Berubah',
+                            });                        
+                        }else{
+                            //'data sama';
+                        }
+                    }
+                })
+            }
         }else{
         // bukan halaman vote/hasil 
         // console.log('beda');

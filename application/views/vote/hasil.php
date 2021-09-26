@@ -6,6 +6,9 @@
             </div>
         </div>
 
+        <!-- alert -->
+        <div class="sukses"></div>
+
         <div class="row mt-2">
             <div class="col-md-12">
                 <div class="row justify-content-start">
