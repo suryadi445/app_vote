@@ -5,28 +5,32 @@
                 <h3 class="text-center font-weight-bold text-capitalize">Pemilihan Umum RT 02/15 tahun 2023</h3>
             </div>
         </div>
+
         <div class="row mt-2">
             <div class="col-md-12">
                 <div class="row justify-content-start">
                     <div class="col-md-5 text-capitalize">
-                        <?php foreach ($join as $row) : ?>
-                            <div class="card mb-3" style="max-width: 540px;">
+                        <div id="output"></div>
+                        <?php
+                        $no = 1;
+                        foreach ($join as $row) :
+                        ?>
+                            <!-- <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
                                         <img src="<?= base_url('assets/upload_kandidat/') ?><?= $row['foto'] ?>" class="img-thumbnail" style="width: 120px; height:198px">
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="font-weight-bold text-danger text-capitalize card-header">
-                                            <?= $row['hasil'] ?> Suara
-                                        </div>
-                                        <div class="card-body">
+                                    <div class="col-md-8"> -->
+                            <!-- <div class="font-weight-bold text-danger text-capitalize card-header hasil_ajax"></div> -->
+                            <!-- <div class="hasil_ajax"></div> -->
+                            <!-- <div class="card-body">
                                             <p class="text-center font-weight-bold text-capitalize"><?= $row['no_urut'] ?></p>
                                             <h5 class="font-weight-bold card-title"><?= $row['nama'] ?></h5>
                                             <p class="card-text text-capitalize"><?= $row['alamat'] ?></p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         <?php endforeach ?>
                     </div>
                     <div class="col-md-7 text-capitalize">

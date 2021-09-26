@@ -79,8 +79,6 @@ $(document).ready(function () {
 			processData: false,
 			data : form_data,
 			success :  function (response) {
-				// console.log(response);
-				// return false
 				var obj = JSON.parse(response)
 
 				if(response == 'true'){

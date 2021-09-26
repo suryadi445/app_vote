@@ -13,7 +13,7 @@ class Vote extends CI_Controller
     public function index()
     {
 
-        $data['result']   = $this->Admin_model->get('tbl_kandidat');
+        $data['result']   = $this->Vote_model->get('tbl_kandidat');
 
         $data['judul']    = 'Voting';
         $this->load->view('template_auth/header', $data);
@@ -32,14 +32,47 @@ class Vote extends CI_Controller
     public function hasil()
     {
 
-        // $data['result']     = $this->Vote_model->get('vote');
-
         $data['join']       = $this->Vote_model->join();
 
         $data['judul']    = 'Hasil Voting';
         $this->load->view('templates/header', $data);
         $this->load->view('vote/hasil', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function hasil_ajax()
+    {
+        $data       = $this->Vote_model->join();
+        // $data = $this->db->query("SELECT 
+        //                                     a.*, 
+        //                                     b.* 
+        //                                   FROM tbl_kandidat AS a
+        //                                   LEFT JOIN vote AS b
+        //                                   ON a.no_urut = b.no_urut
+        //                                   ORDER BY b.hasil DESC")->result();
+
+        echo json_encode($data);
+    }
+
+    public function ajax_data()
+    {
+        $this->db->select('hasil');
+        $query = $this->db->get('vote')->result_array();
+        foreach ($query as $key => $data_ajax) {
+            $data = $data_ajax['hasil'];
+            // echo json_encode($data);
+        }
+
+        $join       = $this->Vote_model->join();
+        foreach ($join as $key => $data_join) {
+            $data_join = $data_join['hasil'];
+        }
+
+        if ($data === $data_join) {
+            echo json_encode('a');
+        } else {
+            echo json_encode('b');
+        }
     }
 
     public function insert()
@@ -60,6 +93,10 @@ class Vote extends CI_Controller
 
         $this->db->where('no_urut', $data_kandidat);
         $query = $this->db->update('vote', $data);
-        echo json_encode($query);
+        if ($query) {
+            echo json_encode($query);
+        } else {
+            return false;
+        }
     }
 }
