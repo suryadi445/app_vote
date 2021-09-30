@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     //==============================================================================================//
 
-    // alert
+    // alert toast
 	$sukses = $(".sukses").attr("data-id");
 	$flash = $(".gagal").attr("data-id");
 	$(function () {
@@ -27,8 +27,10 @@ $(document).ready(function(){
 	});
     
     //==============================================================================================//
+    // alert ketika kandidat RT dipilih
     $('.kandidat').on('click', function(){
         var data_kandidat = $(this).attr('data-id');
+        var pemilih       = $('.data').attr('data-id');
             Swal.fire({
                 icon: 'warning',
                 text: 'Apakah anda yakin memilih kandidat ini?',
@@ -38,8 +40,12 @@ $(document).ready(function(){
                     $.ajax({
                         url: 'vote/insert',
                         type: 'post',
-                        data: {data_kandidat:data_kandidat},
+                        data: {
+                            data_kandidat:data_kandidat,
+                            pemilih: pemilih
+                        },
                         success: function(data){
+                            // console.log(data);
                             if (data == 'true') {
                             window.location.href = 'vote/hasil';
                         }
@@ -50,7 +56,7 @@ $(document).ready(function(){
     })
 
     //==============================================================================================//
-
+    // button uintuk logout
     $('.logout').click(function(e){
 	e.preventDefault();
     var link = $(this).attr("href");
@@ -71,10 +77,11 @@ $(document).ready(function(){
 	})
 
     //==============================================================================================//
-
+    // button untuk memulai pemilu
     $('.mulai_pemilu').click(function(e){
 	e.preventDefault();
     var link = $(this).attr("href");
+    var id   = $('.data').attr("data-id");
 		Swal.fire({
 			title: "Yakin?",
 			text: "Anda akan masuk ke sistem Pemilu",
@@ -98,12 +105,13 @@ $(document).ready(function(){
     if(get_url == url){
         // $('#halaman_hasil').ready(function () {
 
-            setInterval(getdata, 5000);
+            // setInterval(getdata, 5000);
             setInterval(alert, 5000);
             getdata();
             alert()
+            sum()
 
-    
+            // untuk mendapatkan data hasil pemilu
             function getdata() {
                 $.ajax({
                     url: 'hasil_ajax',
@@ -135,9 +143,10 @@ $(document).ready(function(){
                 })
             } 
 
+            // untuk mendapatkan status data terbaru untuk mengeluarkan alert dan suara
             function alert(){
                 $.ajax({
-                    url: 'data_ajax',
+                    url: 'ajax_alert',
                     type: 'post',
                     success: function(data){
                         // console.log(data);
@@ -148,7 +157,10 @@ $(document).ready(function(){
                         var set_local = localStorage.setItem('nilai', nilai);
 
                         if (cek_local != nilai) {
+
                             set_local;
+                            
+                            playMusic()
 
                             const Toast = Swal.mixin({
                                 toast: true,
@@ -167,10 +179,36 @@ $(document).ready(function(){
                     }
                 })
             }
-        }else{
-        // bukan halaman vote/hasil 
-        // console.log('beda');
+
+            // untuk menghitung total suara yg sudah diambil
+            function sum(){
+                $.ajax({
+                    url: 'ajax_sum',
+                    type: 'post',
+                    // dataType: 'json',
+                    success: function(data){
+                        console.log(data);
+                        var obj = JSON.parse(data)
+                        var total_pemilih = obj[0].total_pemilih
+                        var pemilih_sah = obj[1].pemilih_sah
+                        var tidak_sah = obj[2].tidak_sah
+                        var golput = obj[3].golput
+
+                        $('#jumlah_pemilih').html('Jumlah pemilih Sementara : ' + '<b>' + total_pemilih + '</b>')
+                        $('#sah').html('Jumlah pemilih Sah : ' + '<b>' + pemilih_sah + '</b>')
+                        $('#tidak_sah').html('Jumlah Pemilih Tidak Sah : ' + '<b>' +tidak_sah + '</b>')
+                    }
+                })
+            }
+
+    }else{
+    // bukan halaman vote/hasil 
+    // console.log('beda');
     };
+
+    function playMusic() {
+    $("#myAudio")[0].play();
+    }
 
 
     //==============================================================================================//

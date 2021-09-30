@@ -10,17 +10,17 @@
     <div class="card">
         <div class="card-body login-card-body mt-2">
             <p class="login-box-msg mb-3 text-capitalize">Login untuk masuk kedalam sistem</p>
-            <form action="" method="post">
+            <form action="<?= base_url('auth/pemilih') ?>" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="handphone" placeholder="No Handphone" value="<?= set_value('handphone') ?>">
+                    <input type="text" class="form-control" name="nik" placeholder="Nik" value="<?= set_value('nik') ?>">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-mobile-alt"></span>
+                            <span class="fas fa-user"></span>
                         </div>
                     </div>
                 </div>
-                <?php if (form_error('handphone')) : ?>
-                    <div class="text-danger mt-n3 errors"><?= form_error('handphone') ?></div>
+                <?php if (form_error('nik')) : ?>
+                    <div class="text-danger mt-n3 errors"><?= form_error('nik') ?></div>
                 <?php endif ?>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" name="password" placeholder="Password">
@@ -39,21 +39,6 @@
                     </div>
                 </div>
             </form>
-
-            <p class="mb-3 mt-3">
-                <a href="">Lupa Password</a>
-            </p>
-
-            <div class="row">
-                <div class="col">
-                    <a href="<?= base_url('auth/registrasi_pemilih') ?>">Registrasi Pemilih</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <a href="<?= base_url('auth/pemilih') ?>">Masuk Pemilih</a>
-                </div>
-            </div>
         </div>
         <!-- /.login-card-body -->
     </div>

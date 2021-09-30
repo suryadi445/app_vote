@@ -11,7 +11,10 @@
             <div class="sukses" data-id="<?= $this->session->flashdata('sukses') ?>"></div>
         <?php endif ?>
 
+        <div class="data bg-danger" data-id="<?= $this->session->userdata('nik') ?>"></div>
+
         <div class="row card shadow p-3 mb-5 bg-danger rounded">
+            <p class="text-center" style="font-size: 22px;">Selamat datang : <?= $this->session->userdata('nik') ?></p>
             <div class="col-md-12">
                 <h3 class="text-center mt-1 mb-3">PETUNJUK PELAKSANAAN PEMILU</h3>
                 <p>

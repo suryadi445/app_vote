@@ -5,6 +5,7 @@
                 <h3 class="text-center font-weight-bold text-capitalize">Pemilihan Umum RT 02/15 tahun 2023</h3>
             </div>
         </div>
+        <div class="data" data-id="<?= $this->session->userdata('nik'); ?>"></div>
         <div class="row">
             <div class="col-md-12">
                 <div class="row justify-content-around">

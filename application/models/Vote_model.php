@@ -25,4 +25,10 @@ class Vote_model extends CI_Model
         $query = $this->db->get()->result_array();
         return $query;
     }
+
+    public function update($tabel, $data, $field, $id)
+    {
+        $this->db->where($field, $id);
+        return $this->db->update($tabel, $data);
+    }
 }

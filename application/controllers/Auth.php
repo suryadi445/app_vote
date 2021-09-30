@@ -40,20 +40,14 @@ class Auth extends CI_Controller
                 $data = [
                     'handphone' => $user['handphone'],
                     'nama'      => $user['nama'],
+                    'id'        => $user['id']
                 ];
 
                 if ($user['user'] == 'user') {
-                    // aktivasi 0 = belum memilih
-                    if ($user['aktivasi'] == 0) {
-                        $user_login = $user['nama'];
-                        $this->session->set_flashdata('sukses', 'Selamat datang ' . $data['nama']);
-                        $this->session->set_userdata('nama', $user_login);
-                        redirect('vote/test_vote');
-                    } else {
-                        // user sudah memilih kandidat
-                        $this->session->set_flashdata('gagal', 'Anda sudah melakukan pemilihan');
-                        redirect('auth');
-                    }
+                    // $user_login = $user['nama'];
+                    $this->session->set_flashdata('sukses', 'Selamat datang ' . $data['nama']);
+                    $this->session->set_userdata('id', $data['id']);
+                    redirect('vote/test_vote');
                 } else {
                     $this->session->set_flashdata('sukses', 'Selamat datang ' . $data['nama']);
                     $this->session->set_userdata($data);
@@ -62,11 +56,11 @@ class Auth extends CI_Controller
             } else {
                 $this->session->set_flashdata('gagal', 'Password yang anda masukkan salah');
 
-                redirect('auth/index');
+                redirect('auth');
             }
         } else {
             $this->session->set_flashdata('gagal', 'Anda belum terdaftar, mohon registrasi terlebih dahulu..');
-            redirect('auth/index');
+            redirect('auth');
         }
     }
 
@@ -142,6 +136,31 @@ class Auth extends CI_Controller
         }
     }
 
+    public function registrasi_pemilih()
+    {
+        $this->form_validation->set_rules('nik', 'NIK', 'required|trim|numeric|is_unique[tbl_pemilih.nik]'); //nik
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('error', validation_errors()); // session untuk error saat validasi error
+
+            $data['judul']    = 'Registrasi';
+            $this->load->view('templates/header', $data);
+            $this->load->view('auth/registrasi_pemilih', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $nik                    = htmlspecialchars($this->input->post('nik', true));
+
+            $data = [
+                'nik'               => $nik,
+                'password'          => $nik,
+            ];
+
+            $this->session->set_flashdata('sukses', 'Terima kasih, Registrasi berhasil dilakukan..');
+            $this->Auth_model->insert('tbl_pemilih', $data);
+            redirect('auth/registrasi_pemilih');
+        }
+    }
+
     // logout
     public function logout()
     {
@@ -153,5 +172,53 @@ class Auth extends CI_Controller
         $this->session->sess_destroy();
 
         redirect('auth');
+    }
+
+    // login
+    public function pemilih()
+    {
+        $this->form_validation->set_rules('nik', 'NIK', 'required|trim|numeric');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|numeric');
+
+        if ($this->form_validation->run() == false) {
+            $data['judul']    = 'Login';
+            $this->load->view('template_auth/header', $data);
+            $this->load->view('auth/login_pemilih', $data);
+            $this->load->view('template_auth/footer');
+        } else {
+            $this->_login_pemilih();
+        }
+    }
+
+    private function _login_pemilih()
+    {
+        $nik            = htmlspecialchars($this->input->post('nik', true));
+        $password       = htmlspecialchars($this->input->post('password', true));
+
+        $user           = $this->Auth_model->getRow('tbl_pemilih', 'nik', $nik);
+
+        if ($user) {
+            $data = [
+                'nik'       => $user['nik'],
+                'id'        => $user['id']
+            ];
+
+            if ($user['nik'] == $password) {
+                if ($user['aktivasi'] == 0) {
+                    $this->session->set_flashdata('sukses', 'selamat datang ' . $data['nik']);
+                    $this->session->set_userdata('nik', $data['nik']);
+                    redirect('vote/test_vote');
+                } else {
+                    $this->session->set_flashdata('gagal', 'anda sudah melakukan pemilihan');
+                    redirect('auth/pemilih');
+                }
+            } else {
+                $this->session->set_flashdata('gagal', 'Password atau NIK Anda salah');
+                redirect('auth/pemilih');
+            }
+        } else {
+            $this->session->set_flashdata('gagal', 'Anda belum terdaftar, mohon registrasi terlebih dahulu..');
+            redirect('auth/pemilih');
+        }
     }
 }

@@ -6,9 +6,6 @@
             </div>
         </div>
 
-        <!-- alert -->
-        <div class="sukses"></div>
-
         <div class="row mt-2">
             <div class="col-md-12">
                 <div class="row justify-content-start">
@@ -42,18 +39,24 @@
                                 Hasil pemilihan RT 02/15 </div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Jumlah pemilih</li>
-                                    <li class="list-group-item">Jumlah suara yang hadir</li>
-                                    <li class="list-group-item">jumlah suara yang tidak hadir</li>
-                                    <li class="list-group-item">jumlah suara yang sah</li>
-                                    <li class="list-group-item">jumlah suara yang tidak sah</li>
-                                    <li class="list-group-item">tanggal pelaksanaan</li>
-                                    <li class="list-group-item">waktu pelaksanaan</li>
+                                    <li class="list-group-item" id="jumlah_pemilih"></li>
+                                    <li class="list-group-item" id="sah"></li>
+                                    <li class="list-group-item" id="tidak_sah">jumlah suara yang tidak sah :</li>
+                                    <!-- <li class="list-group-item" id="">Jumlah suara yang hadir :</li>
+                                    <li class="list-group-item" id="">jumlah suara yang tidak hadir :</li> -->
+                                    <li class="list-group-item" id="">tanggal pelaksanaan :</li>
+                                    <li class="list-group-item" id="">waktu pelaksanaan :</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalHasil">Simpan</button>
+                            <a href="<?= base_url('auth/logout') ?>" style="z-index: 99; position: absolute" class="btn btn-danger logout">Logout</a>
+
+                            <!-- audio -->
+                            <audio id="myAudio" style="width: 50px; z-index:1; position:relative" controls>
+                                <source src="<?= base_url('assets/alarm.mp3') ?>" type="audio/mpeg">
+                            </audio>
+                            <!-- batas audio -->
                         </div>
                     </div>
                 </div>
@@ -61,39 +64,3 @@
         </div>
     </div>
 </section>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="modalHasil" tabindex="-1" aria-labelledby="labelHasil" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="labelHasil">Konfirmasi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group row">
-                        <label for="nama" class="col-sm-2 col-form-label">Nama</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nama">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Simpan</button>
-                    </div>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
